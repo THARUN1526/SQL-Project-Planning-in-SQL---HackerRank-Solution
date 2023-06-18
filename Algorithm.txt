@@ -1,0 +1,18 @@
+The given code is an alternative SQL query to solve the problem of finding different projects completed based on the given table representation of tasks. It uses a subquery approach to identify consecutive tasks and then calculates the start and end dates for each project. Let's break down the code and explain its logic step by step:
+
+
+1. The outermost `SELECT` statement selects the `START_DATE` and the minimum `END_DATE` for each project.
+
+2. The subquery `(SELECT START_DATE FROM PROJECTS WHERE START_DATE NOT IN (SELECT END_DATE FROM PROJECTS)) A` selects the distinct `START_DATE` values from the `PROJECTS` table where the `START_DATE` does not appear in the `END_DATE` column. This subquery filters out the start dates of projects that are not consecutive to any end date, ensuring that only the start dates of projects are considered.
+
+3. The subquery `(SELECT END_DATE FROM PROJECTS WHERE END_DATE NOT IN (SELECT START_DATE FROM PROJECTS)) B` selects the distinct `END_DATE` values from the `PROJECTS` table where the `END_DATE` does not appear in the `START_DATE` column. This subquery filters out the end dates of projects that are not consecutive to any start date, ensuring that only the end dates of projects are considered.
+
+4. The condition `WHERE START_DATE < END_DATE` filters out the cases where the start date is greater than or equal to the end date, ensuring that only valid project durations are considered.
+
+5. The `GROUP BY START_DATE` groups the projects by their start dates.
+
+6. The `ORDER BY (MIN(END_DATE) - START_DATE), START_DATE` clause orders the projects first by the difference in days between the minimum end date and the start date (ascending order), and then by the start date. This ensures that the projects are ordered by the number of completion days and then by the start date.
+
+The logic of the code is similar to the previous solution, but instead of using the `DATEDIFF` function, it uses subqueries and joins to identify the consecutive tasks and calculate the project start and end dates.
+
+Overall, both the previous solution and this alternative solution provide the same outcome, finding the different projects completed based on the given table representation of tasks.
