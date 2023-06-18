@@ -1,0 +1,18 @@
+This problem involves finding different projects completed based on the given table representation of tasks. The table "Projects" contains three columns: Task_ID, Start_Date, and End_Date. Each row in the table represents a task, and it is guaranteed that the difference between the End_Date and the Start_Date is equal to 1 day for each task.
+
+To solve this problem, we need to identify consecutive tasks with consecutive End_Dates, as they belong to the same project. Then, we need to output the start and end dates of each project, sorted by the number of days it took to complete the project in ascending order. If there are multiple projects with the same number of completion days, we should order them by the start date of the project.
+
+
+Let's break down the query:
+
+1. The SELECT statement selects the minimum Start_Date as Project_Start_Date and the maximum End_Date as Project_End_Date for each project.
+
+2. The FROM clause specifies the table name as Projects.
+
+3. The GROUP BY clause groups the tasks by the difference in days between the End_Date and Start_Date. This groups the consecutive tasks with the same number of completion days together.
+
+4. The ORDER BY clause sorts the projects first by the number of days it took to complete the project (using the DATEDIFF function on End_Date and Start_Date), and then by the Project_Start_Date. This ensures that projects are ordered first by the number of completion days and then by the start date.
+
+The output of the query will provide the start and end dates of each project, listed in ascending order based on the number of days it took to complete the project. If there are projects with the same number of completion days, they will be ordered by the start date of the project, as shown in the sample output provided in the question.
+
+The query utilizes the grouping and aggregation functions in SQL to determine the projects and the respective start and end dates based on the consecutive tasks.
